@@ -1,0 +1,47 @@
+.App {
+    text-align: center;
+  }
+  
+  .navbar {
+    font-size: large;
+    font-weight: bolder;
+    background-color: #41B3A3;
+    color: white;
+    padding: 10px;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px;
+  }
+  
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    margin-bottom: 5px;
+  }
+  
+  input {
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .chart-container {
+    margin-top: 20px;
+  }
+  
