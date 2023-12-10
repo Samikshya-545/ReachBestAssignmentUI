@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import '../styles/BookMatchingForm.css';
+import BookMatchingModal from './BookSuggestingModal';
 
 const BookMatchingForm = () => {
   const [name, setName] = useState('');
@@ -8,6 +9,8 @@ const BookMatchingForm = () => {
   const [favoriteGenre, setFavoriteGenre] = useState('');
   const [readingPace, setReadingPace] = useState('');
   const [suggestedBooks, setSuggestedBooks] = useState([]); //Books
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -25,17 +28,26 @@ const BookMatchingForm = () => {
         });
   
         setSuggestedBooks(response.data.suggestedBooks);
+        setIsModalOpen(true);
       } catch (error) {
         console.error('Error suggesting books:', error);
       }
   };
 
+  const handleClearSuggestions = () => {
+    setSuggestedBooks([]);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
+    {/* {suggestedBooks.length === 0 ? ( */}
         <div className="book-matching-form">
             <div className='book-matching-form-header'>Welcome to BookHarmony</div>
             <div className='book-matching-form-tagline'>Where Personalities and Pages Unite</div>
-
             <form onSubmit={handleFormSubmit}>
 
                 <label className='book-matching-form-instruction'>Kindly answer the below questions to find your perfect book</label>
@@ -107,9 +119,12 @@ const BookMatchingForm = () => {
                 </div>
 
                 <button className='formSubmitBtn' type="submit">Find My Perfect Book</button>
-            </form>
+            </form> 
         </div>
-        Books {suggestedBooks}
+
+            {isModalOpen && (
+            <BookMatchingModal suggestedBooks={suggestedBooks} onClose={handleCloseModal} />
+            )}
     </>
     
   );
